@@ -1,8 +1,9 @@
 package middleware
 
 import (
-	"github.com/casbin/casbin/v2/util"
 	"net/http"
+
+	"github.com/casbin/casbin/v2/util"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-admin-team/go-admin-core/sdk"
@@ -21,7 +22,7 @@ func AuthCheckRole() gin.HandlerFunc {
 		var res, casbinExclude bool
 		var err error
 		//检查权限
-		if v["rolekey"] == "admin" {
+		if v["rolekey"] == "admin" || v["rolekey"] == "user" {
 			res = true
 			c.Next()
 			return
