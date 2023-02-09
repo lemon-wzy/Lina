@@ -8,20 +8,24 @@ import (
 
 type GiftInfoGetPageReq struct {
 	dto.Pagination `search:"-"`
+	Title          string `form:"title" search:"type:contains;column:title;table:gift_info" comment:"名称"`
+	StartPrice     string `form:"startPrice" search:"type:gte;column:price;table:gift_info" comment:"价格"`
+	EndPrice       string `form:"endPrice" search:"type:lte;column:price;table:gift_info" comment:"价格"`
 	GiftInfoOrder
 }
 
 type GiftInfoOrder struct {
-	Id         string `form:"idOrder"  search:"type:order;column:id;table:gift_info"`
-	Title      string `form:"titleOrder"  search:"type:order;column:title;table:gift_info"`
-	Type       string `form:"typeOrder"  search:"type:order;column:type;table:gift_info"`
-	Parametric string `form:"parametricOrder"  search:"type:order;column:parametric;table:gift_info"`
-	Images     string `form:"imagesOrder"  search:"type:order;column:images;table:gift_info"`
-	Price      string `form:"priceOrder"  search:"type:order;column:price;table:gift_info"`
-	NetPrice   string `form:"netPriceOrder"  search:"type:order;column:net_price;table:gift_info"`
-	BoxNum     string `form:"boxNumOrder"  search:"type:order;column:box_num;table:gift_info"`
-	IfBox      string `form:"ifBoxOrder"  search:"type:order;column:if_box;table:gift_info"`
-	IfTax      string `form:"ifTaxOrder"  search:"type:order;column:if_tax;table:gift_info"`
+	Id            string `form:"idOrder"  search:"type:order;column:id;table:gift_info"`
+	Title         string `form:"titleOrder"  search:"type:order;column:title;table:gift_info"`
+	Type          string `form:"typeOrder"  search:"type:order;column:type;table:gift_info"`
+	Parametric    string `form:"parametricOrder"  search:"type:order;column:parametric;table:gift_info"`
+	Images        string `form:"imagesOrder"  search:"type:order;column:images;table:gift_info"`
+	price         string `form:"priceOrder"  search:"type:order;column:price;table:gift_info"`
+	NetPrice      string `form:"netPriceOrder"  search:"type:order;column:net_price;table:gift_info"`
+	BoxNum        string `form:"boxNumOrder"  search:"type:order;column:box_num;table:gift_info"`
+	IfBox         string `form:"ifBoxOrder"  search:"type:order;column:if_box;table:gift_info"`
+	IfTax         string `form:"ifTaxOrder"  search:"type:order;column:if_tax;table:gift_info"`
+	ShippingPlace string `form:"shippingPlaceOrder" search:"type:order;comment:shipping_Place;table:gift_info"`
 }
 
 func (m *GiftInfoGetPageReq) GetNeedSearch() interface{} {
@@ -29,16 +33,17 @@ func (m *GiftInfoGetPageReq) GetNeedSearch() interface{} {
 }
 
 type GiftInfoInsertReq struct {
-	Id         int    `json:"-" comment:"主键"` // 主键
-	Title      string `json:"title" comment:"名称"`
-	Type       string `json:"type" comment:"型号"`
-	Parametric string `json:"parametric" comment:"参数"`
-	Images     string `json:"images" comment:"图片"`
-	Price      string `json:"price" comment:"价格"`
-	NetPrice   string `json:"netPrice" comment:"网上参考价格"`
-	BoxNum     string `json:"boxNum" comment:"装箱数"`
-	IfBox      string `json:"ifBox" comment:"是否彩盒"`
-	IfTax      string `json:"ifTax" comment:"是否税"`
+	Id            int    `json:"-" comment:"主键"` // 主键
+	Title         string `json:"title" comment:"名称"`
+	Type          string `json:"type" comment:"型号"`
+	Parametric    string `json:"parametric" comment:"参数"`
+	Images        string `json:"images" comment:"图片"`
+	Price         string `json:"price" comment:"价格"`
+	NetPrice      string `json:"netPrice" comment:"网上参考价格"`
+	BoxNum        string `json:"boxNum" comment:"装箱数"`
+	IfBox         string `json:"ifBox" comment:"是否彩盒"`
+	IfTax         string `json:"ifTax" comment:"是否税"`
+	ShippingPlace string `json:"shippingPlace" comment:发货地"`
 	common.ControlBy
 }
 
@@ -55,6 +60,7 @@ func (s *GiftInfoInsertReq) Generate(model *models.GiftInfo) {
 	model.BoxNum = s.BoxNum
 	model.IfBox = s.IfBox
 	model.IfTax = s.IfTax
+	model.ShippingPlace = s.ShippingPlace
 }
 
 func (s *GiftInfoInsertReq) GetId() interface{} {
@@ -62,16 +68,17 @@ func (s *GiftInfoInsertReq) GetId() interface{} {
 }
 
 type GiftInfoUpdateReq struct {
-	Id         int    `uri:"id" comment:"主键"` // 主键
-	Title      string `json:"title" comment:"名称"`
-	Type       string `json:"type" comment:"型号"`
-	Parametric string `json:"parametric" comment:"参数"`
-	Images     string `json:"images" comment:"图片"`
-	Price      string `json:"price" comment:"价格"`
-	NetPrice   string `json:"netPrice" comment:"网上参考价格"`
-	BoxNum     string `json:"boxNum" comment:"装箱数"`
-	IfBox      string `json:"ifBox" comment:"是否彩盒"`
-	IfTax      string `json:"ifTax" comment:"是否税"`
+	Id            int    `uri:"id" comment:"主键"` // 主键
+	Title         string `json:"title" comment:"名称"`
+	Type          string `json:"type" comment:"型号"`
+	Parametric    string `json:"parametric" comment:"参数"`
+	Images        string `json:"images" comment:"图片"`
+	Price         string `json:"price" comment:"价格"`
+	NetPrice      string `json:"netPrice" comment:"网上参考价格"`
+	BoxNum        string `json:"boxNum" comment:"装箱数"`
+	IfBox         string `json:"ifBox" comment:"是否彩盒"`
+	IfTax         string `json:"ifTax" comment:"是否税"`
+	ShippingPlace string `json:"shippingPlace" comment:发货地"`
 	common.ControlBy
 }
 
@@ -88,6 +95,7 @@ func (s *GiftInfoUpdateReq) Generate(model *models.GiftInfo) {
 	model.BoxNum = s.BoxNum
 	model.IfBox = s.IfBox
 	model.IfTax = s.IfTax
+	model.ShippingPlace = s.ShippingPlace
 }
 
 func (s *GiftInfoUpdateReq) GetId() interface{} {
