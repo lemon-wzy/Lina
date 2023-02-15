@@ -20,12 +20,14 @@ type GiftInfoOrder struct {
 	Type          string `form:"typeOrder"  search:"type:order;column:type;table:gift_info"`
 	Parametric    string `form:"parametricOrder"  search:"type:order;column:parametric;table:gift_info"`
 	Images        string `form:"imagesOrder"  search:"type:order;column:images;table:gift_info"`
-	price         string `form:"priceOrder"  search:"type:order;column:price;table:gift_info"`
+	Price         string `form:"priceOrder"  search:"type:order;column:price;table:gift_info"`
 	NetPrice      string `form:"netPriceOrder"  search:"type:order;column:net_price;table:gift_info"`
 	BoxNum        string `form:"boxNumOrder"  search:"type:order;column:box_num;table:gift_info"`
 	IfBox         string `form:"ifBoxOrder"  search:"type:order;column:if_box;table:gift_info"`
 	IfTax         string `form:"ifTaxOrder"  search:"type:order;column:if_tax;table:gift_info"`
-	ShippingPlace string `form:"shippingPlaceOrder" search:"type:order;comment:shipping_Place;table:gift_info"`
+	ShippingPlace string `form:"shippingPlaceOrder"  search:"type:order;column:shipping_place;table:gift_info"`
+	TagsId        string `form:"tagsIdOrder"  search:"type:order;column:tags_id;table:gift_info"`
+	TagsName      string `form:"tagsNameOrder"  search:"type:order;column:tags_name;table:gift_info"`
 }
 
 func (m *GiftInfoGetPageReq) GetNeedSearch() interface{} {
@@ -43,7 +45,9 @@ type GiftInfoInsertReq struct {
 	BoxNum        string `json:"boxNum" comment:"装箱数"`
 	IfBox         string `json:"ifBox" comment:"是否彩盒"`
 	IfTax         string `json:"ifTax" comment:"是否税"`
-	ShippingPlace string `json:"shippingPlace" comment:发货地"`
+	ShippingPlace string `json:"shippingPlace" comment:"发货地"`
+	TagsId        string `json:"tagsId" comment:"标签id"`
+	TagsName      string `json:"tagsName" comment:"标签名称"`
 	common.ControlBy
 }
 
@@ -61,6 +65,8 @@ func (s *GiftInfoInsertReq) Generate(model *models.GiftInfo) {
 	model.IfBox = s.IfBox
 	model.IfTax = s.IfTax
 	model.ShippingPlace = s.ShippingPlace
+	model.TagsId = s.TagsId
+	model.TagsName = s.TagsName
 }
 
 func (s *GiftInfoInsertReq) GetId() interface{} {
@@ -78,7 +84,9 @@ type GiftInfoUpdateReq struct {
 	BoxNum        string `json:"boxNum" comment:"装箱数"`
 	IfBox         string `json:"ifBox" comment:"是否彩盒"`
 	IfTax         string `json:"ifTax" comment:"是否税"`
-	ShippingPlace string `json:"shippingPlace" comment:发货地"`
+	ShippingPlace string `json:"shippingPlace" comment:"发货地"`
+	TagsId        string `json:"tagsId" comment:"标签id"`
+	TagsName      string `json:"tagsName" comment:"标签名称"`
 	common.ControlBy
 }
 
@@ -96,6 +104,8 @@ func (s *GiftInfoUpdateReq) Generate(model *models.GiftInfo) {
 	model.IfBox = s.IfBox
 	model.IfTax = s.IfTax
 	model.ShippingPlace = s.ShippingPlace
+	model.TagsId = s.TagsId
+	model.TagsName = s.TagsName
 }
 
 func (s *GiftInfoUpdateReq) GetId() interface{} {
