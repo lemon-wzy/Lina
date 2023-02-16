@@ -129,3 +129,17 @@ type GiftInfoDeleteReq struct {
 func (s *GiftInfoDeleteReq) GetId() interface{} {
 	return s.Ids
 }
+
+//GitInfoGetPageReq 功能分页请求参数
+type CustomGiftInfoGetPageReq struct {
+	dto.Pagination `search:"-"`
+	Title          string `form:"title"`
+	StartPrice     string `form:"startPrice"`
+	EndPrice       string `form:"endPrice"`
+	TagsId         string `form:"tagsId"`
+	GiftInfoOrder
+}
+
+func (s *CustomGiftInfoGetPageReq) CustomSearch() interface{} {
+	return *s
+}

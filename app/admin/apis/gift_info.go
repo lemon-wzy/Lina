@@ -28,7 +28,8 @@ type GiftInfo struct {
 // @Router /api/v1/gift-info [get]
 // @Security Bearer
 func (e GiftInfo) GetPage(c *gin.Context) {
-	req := dto.GiftInfoGetPageReq{}
+	// req := dto.GiftInfoGetPageReq{}
+	req := dto.CustomGiftInfoGetPageReq{}
 	s := service.GiftInfo{}
 	err := e.MakeContext(c).
 		MakeOrm().
@@ -45,7 +46,8 @@ func (e GiftInfo) GetPage(c *gin.Context) {
 	list := make([]models.GiftInfo, 0)
 	var count int64
 
-	err = s.GetPage(&req, p, &list, &count)
+	// err = s.GetPage(&req, p, &list, &count)
+	err = s.CustomGetPage(&req, p, &list, &count)
 	if err != nil {
 		e.Error(500, err, fmt.Sprintf("获取商品失败，\r\n失败信息 %s", err.Error()))
 		return
