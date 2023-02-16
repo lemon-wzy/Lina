@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/go-admin-team/go-admin-core/sdk/service"
 	"gorm.io/gorm"
@@ -126,12 +127,25 @@ func (e *GiftInfo) CustomGetPage(dto *dto.CustomGiftInfoGetPageReq, p *actions.D
 	}
 
 	if len(dto.TagsId) != 0 {
+		str := strings.Split(dto.TagsId, ",")
+		var sql string
 
-		for _, tagId := range dto.TagsId {
+		for index, tagId := range str {
 
-			query = query.Where("tags_id like ?", "%"+string(tagId)+"%")
+			// query = query.Where("tags_id like ?", "%"+string(tagId)+"%")
+			if len(tagId) == 0 {
+				continue
+			}
+			if index == len(str)-2 {
+
+				sql = sql + "find_in_set(" + tagId + ",tags_id)  "
+			} else {
+				sql = sql + "find_in_set(" + tagId + ",tags_id) or "
+			}
+			// query = query.Or("find_in_set(?,tags_id)", tagId)
 
 		}
+		query = query.Where(sql)
 	}
 
 	db := query.Find(list).Limit(-1).Offset(-1).Count(count)
