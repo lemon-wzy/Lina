@@ -8,6 +8,7 @@ import (
 
 type SysTagsGetPageReq struct {
 	dto.Pagination `search:"-"`
+	Id             int `form:"id" search:"type:exact;column:id;table:sys_tags" comment:""`
 	SysTagsOrder
 }
 

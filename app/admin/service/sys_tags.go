@@ -20,7 +20,8 @@ type SysTags struct {
 func (e *SysTags) GetPage(c *dto.SysTagsGetPageReq, p *actions.DataPermission, list *[]models.SysTags, count *int64) error {
 	var err error
 	var data models.SysTags
-
+	e.Log.Debug(c)
+	e.Log.Debug(c.GetPageSize())
 	err = e.Orm.Model(&data).
 		Scopes(
 			cDto.MakeCondition(c.GetNeedSearch()),

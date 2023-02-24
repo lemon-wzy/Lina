@@ -18,6 +18,7 @@ type GiftInfo struct {
 	ShippingPlace string `json:"shippingPlace" gorm:"type:varchar(1000);comment:发货地"`
 	TagsId        string `json:"tagsId" gorm:"type:varchar(1000);comment:标签id"`
 	TagsName      string `json:"tagsName" gorm:"type:varchar(1000);comment:标签名称"`
+	OnePrice      string `json:"onePrice" gorm:"type:varchar(1000);comment:一件代发的价格"`
 	models.ModelTime
 	models.ControlBy
 }

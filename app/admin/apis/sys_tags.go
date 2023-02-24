@@ -50,7 +50,7 @@ func (e SysTags) GetPage(c *gin.Context) {
 		e.Error(500, err, fmt.Sprintf("获取标签表失败，\r\n失败信息 %s", err.Error()))
 		return
 	}
-
+	e.Logger.Debug(req.GetPageIndex())
 	e.PageOK(list, int(count), req.GetPageIndex(), req.GetPageSize(), "查询成功")
 }
 

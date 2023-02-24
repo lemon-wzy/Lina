@@ -28,6 +28,7 @@ type GiftInfoOrder struct {
 	ShippingPlace string `form:"shippingPlaceOrder"  search:"type:order;column:shipping_place;table:gift_info"`
 	TagsId        string `form:"tagsIdOrder"  search:"type:order;column:tags_id;table:gift_info"`
 	TagsName      string `form:"tagsNameOrder"  search:"type:order;column:tags_name;table:gift_info"`
+	OnePrice      string `form:"onePriceOrder"  search:"type:order;column:one_price;table:gift_info"`
 }
 
 func (m *GiftInfoGetPageReq) GetNeedSearch() interface{} {
@@ -48,6 +49,7 @@ type GiftInfoInsertReq struct {
 	ShippingPlace string `json:"shippingPlace" comment:"发货地"`
 	TagsId        string `json:"tagsId" comment:"标签id"`
 	TagsName      string `json:"tagsName" comment:"标签名称"`
+	OnePrice      string `json:"onePrice" comment:"一件代发的价格"`
 	common.ControlBy
 }
 
@@ -67,6 +69,7 @@ func (s *GiftInfoInsertReq) Generate(model *models.GiftInfo) {
 	model.ShippingPlace = s.ShippingPlace
 	model.TagsId = s.TagsId
 	model.TagsName = s.TagsName
+	model.OnePrice = s.OnePrice
 }
 
 func (s *GiftInfoInsertReq) GetId() interface{} {
@@ -87,6 +90,7 @@ type GiftInfoUpdateReq struct {
 	ShippingPlace string `json:"shippingPlace" comment:"发货地"`
 	TagsId        string `json:"tagsId" comment:"标签id"`
 	TagsName      string `json:"tagsName" comment:"标签名称"`
+	OnePrice      string `json:"onePrice" comment:"一件代发的价格"`
 	common.ControlBy
 }
 
@@ -106,6 +110,7 @@ func (s *GiftInfoUpdateReq) Generate(model *models.GiftInfo) {
 	model.ShippingPlace = s.ShippingPlace
 	model.TagsId = s.TagsId
 	model.TagsName = s.TagsName
+	model.OnePrice = s.OnePrice
 }
 
 func (s *GiftInfoUpdateReq) GetId() interface{} {
